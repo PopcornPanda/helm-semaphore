@@ -1,0 +1,25 @@
+{{- if and .Values.semaphore.persistence.enabled }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pvc-{{ template "semaphore.name" . }}
+{{- with .Values.semaphore.persistence.annotations  }}
+  annotations:
+{{ toYaml . | indent 4 }}
+{{- end }}
+  labels:
+    app: {{ template "semaphore.name" . }}
+spec:
+  accessModes:
+    - {{ .Values.semaphore.persistence.accessMode | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.semaphore.persistence.size | quote }}
+{{- if .Values.semaphore.persistence.storageClass }}
+{{- if (eq "-" .Values.semaphore.persistence.storageClass) }}
+  storageClassName: ""
+{{- else }}
+  storageClassName: "{{ .Values.semaphore.persistence.storageClass }}"
+{{- end }}
+{{- end }}
+{{- end }}

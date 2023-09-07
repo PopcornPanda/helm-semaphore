@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "semaphore.fullname" . }}
+  labels:
+    {{- include "semaphore.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.semaphore.service.type }}
+  {{- if .Values.semaphore.service.loadBalancerIP }}
+  loadBalancerIP: {{ .Values.semaphore.service.loadBalancerIP }}
+  {{- end }}
+  ports:
+    - port: {{ .Values.semaphore.service.port }}
+      targetPort: {{ .Values.semaphore.service.targetPort }}
+      protocol: TCP
+      name: {{ .Values.semaphore.service.semaphore }}
+  selector:
+    {{- include "semaphore.selectorLabels" . | nindent 4 }}

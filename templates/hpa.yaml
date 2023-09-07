@@ -1,0 +1,28 @@
+{{- if .Values.semaphore.autoscaling.enabled }}
+apiVersion: autoscaling/v2beta1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: {{ include "semaphore.fullname" . }}
+  labels:
+    {{- include "semaphore.labels" . | nindent 4 }}
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: {{ include "semaphore.fullname" . }}
+  minReplicas: {{ .Values.semaphore.autoscaling.minReplicas }}
+  maxReplicas: {{ .Values.semaphore.autoscaling.maxReplicas }}
+  metrics:
+    {{- if .Values.semaphore.autoscaling.targetCPUUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: cpu
+        targetAverageUtilization: {{ .Values.semaphore.autoscaling.targetCPUUtilizationPercentage }}
+    {{- end }}
+    {{- if .Values.semaphore.autoscaling.targetMemoryUtilizationPercentage }}
+    - type: Resource
+      resource:
+        name: memory
+        targetAverageUtilization: {{ .Values.semaphore.autoscaling.targetMemoryUtilizationPercentage }}
+    {{- end }}
+{{- end }}

@@ -1,0 +1,14 @@
+apiVersion: v1
+entries:
+  semaphore:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-09-07T20:50:02.165813155+02:00"
+    description: A Helm chart for Kubernetes
+    digest: 1f6a2d48ae528b248362829300de7c26f159900dc20e881ac8a1e288c9fe8f47
+    name: semaphore
+    type: application
+    urls:
+    - semaphore-1.0.0.tgz
+    version: 1.0.0
+generated: "2023-09-07T20:50:02.165116136+02:00"
