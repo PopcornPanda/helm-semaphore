@@ -53,7 +53,7 @@ semaphore:
     SEMAPHORE_ADMIN_NAME: admin
     SEMAPHORE_ADMIN_EMAIL: admin@localhost
     SEMAPHORE_ADMIN: admin
-    SEMAPHORE_LDAP_ENABLE: 'no' # if you wish to use ldap, set to: 'yes' 
+    SEMAPHORE_LDAP_ACTIVATED: 'no' # if you wish to use ldap, set to: 'yes' 
     SEMAPHORE_LDAP_SERVER: dc01.local.example.com:636
     SEMAPHORE_LDAP_NEEDTLS: 'yes'
     SEMAPHORE_LDAP_BIND_DN: 'uid=bind_user,cn=users,cn=accounts,dc=local,dc=shiftsystems,dc=net'
